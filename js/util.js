@@ -33,7 +33,12 @@ function displayCar(car){
                 "<p>Vehicle make: "+car.vehicleMake+"</p>" +
                 "<p>Vehicle model: "+car.vehicleModel+"</p>" +
                 "<p>Vehicle year: "+car.vehicleYear+"</p>";
-    $("#displayCar").html(html);
+    $("#displayCar")
+        .html(html)
+        .append($('<a>', {
+        text: createJDUrl(car.vehicleMake, car.vehicleModel, car.vehicleYear),
+        href: createJDUrl(car.vehicleMake, car.vehicleModel, car.vehicleYear)
+    }));
     $("#successMessage").removeClass("hidden");
 }
 
@@ -42,7 +47,7 @@ function body_loadCars() {
     if (listOfCars) {
         $.each(listOfCars.cars, function (index, element) {
             $("#links").append($('<a>', {
-                text: element.vehicleMake+" "+element.vehicleModel+" "+element.vehicleYear+" : By "+element.sellerName,
+                text: createJDUrl(element.vehicleMake, element.vehicleModel, element.vehicleYear),
                 href: createJDUrl(element.vehicleMake, element.vehicleModel, element.vehicleYear)
             })).append($('<br>'));
         });
