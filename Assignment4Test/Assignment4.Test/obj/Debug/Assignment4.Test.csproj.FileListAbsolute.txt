@@ -1,0 +1,13 @@
+F:\Users\Rawa\Desktop\Computer Programmer Analyst\Winter 2018\Programming Software Quality Assurance\Assignment4\Assignment4Test\Assignment4.Test\bin\Debug\Assignment4.Test.dll
+F:\Users\Rawa\Desktop\Computer Programmer Analyst\Winter 2018\Programming Software Quality Assurance\Assignment4\Assignment4Test\Assignment4.Test\bin\Debug\Assignment4.Test.pdb
+F:\Users\Rawa\Desktop\Computer Programmer Analyst\Winter 2018\Programming Software Quality Assurance\Assignment4\Assignment4Test\Assignment4.Test\bin\Debug\nunit.framework.dll
+F:\Users\Rawa\Desktop\Computer Programmer Analyst\Winter 2018\Programming Software Quality Assurance\Assignment4\Assignment4Test\Assignment4.Test\bin\Debug\WebDriver.dll
+F:\Users\Rawa\Desktop\Computer Programmer Analyst\Winter 2018\Programming Software Quality Assurance\Assignment4\Assignment4Test\Assignment4.Test\bin\Debug\WebDriver.Support.dll
+F:\Users\Rawa\Desktop\Computer Programmer Analyst\Winter 2018\Programming Software Quality Assurance\Assignment4\Assignment4Test\Assignment4.Test\bin\Debug\nunit.framework.pdb
+F:\Users\Rawa\Desktop\Computer Programmer Analyst\Winter 2018\Programming Software Quality Assurance\Assignment4\Assignment4Test\Assignment4.Test\bin\Debug\nunit.framework.xml
+F:\Users\Rawa\Desktop\Computer Programmer Analyst\Winter 2018\Programming Software Quality Assurance\Assignment4\Assignment4Test\Assignment4.Test\bin\Debug\WebDriver.xml
+F:\Users\Rawa\Desktop\Computer Programmer Analyst\Winter 2018\Programming Software Quality Assurance\Assignment4\Assignment4Test\Assignment4.Test\bin\Debug\WebDriver.Support.xml
+F:\Users\Rawa\Desktop\Computer Programmer Analyst\Winter 2018\Programming Software Quality Assurance\Assignment4\Assignment4Test\Assignment4.Test\obj\Debug\Assignment4.Test.csprojResolveAssemblyReference.cache
+F:\Users\Rawa\Desktop\Computer Programmer Analyst\Winter 2018\Programming Software Quality Assurance\Assignment4\Assignment4Test\Assignment4.Test\obj\Debug\Assignment4.Test.csproj.CoreCompileInputs.cache
+F:\Users\Rawa\Desktop\Computer Programmer Analyst\Winter 2018\Programming Software Quality Assurance\Assignment4\Assignment4Test\Assignment4.Test\obj\Debug\Assignment4.Test.dll
+F:\Users\Rawa\Desktop\Computer Programmer Analyst\Winter 2018\Programming Software Quality Assurance\Assignment4\Assignment4Test\Assignment4.Test\obj\Debug\Assignment4.Test.pdb

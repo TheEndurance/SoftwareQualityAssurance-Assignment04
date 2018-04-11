@@ -24,13 +24,11 @@
 <ul>
     <li><a class="active" href="index.html">Home</a></li>
     <li><a href="carlist.html">Cars</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#about">About</a></li>
 </ul>
 <section>
     <h2>Car form</h2>
     <br>
-    <form id="frmNewCar">
+    <form id="frmNewCar" action="save.html">
         <div class="form-control">
             <label for="sellerName">Seller Name:</label>
             <input type="text" name="sellerName" id="sellerName">
@@ -64,17 +62,11 @@
             <input type="text" name="vehicleYear" id="vehicleYear">
         </div>
         <div class="form-control">
-            <button type="submit">Submit</button>
+            <button id="submitFrmNewCar" type="submit">Submit</button>
         </div>
     </form>
 </section>
-<section>
-    <h2>
-        Car details
-    </h2>
-    <h3><span id="successMessage" class="success-message hidden">Car successfully added!</span></h3>
-    <div id="displayCar"></div>
-</section>
+
 <script src="js/vendor/modernizr-3.5.0.min.js"></script>
 <script src="js/vendor/jquery-3.2.1.min.js"></script>
 <script src="js/vendor/jquery.validate.min.js"></script>
