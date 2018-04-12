@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -15,12 +13,14 @@ namespace Assignment4.Test
     public class SeleniumTests
     {
         private IWebDriver driver;
-        private string baseURL;
+        private string indexHtml;
 
         [SetUp]
         public void SetupTest()
         {
             driver = new FirefoxDriver();
+            string path = AppDomain.CurrentDomain.BaseDirectory;
+            indexHtml = @"file:///" + Path.GetFullPath(Path.Combine(path, @"..\..\..\..\index.html"));
         }
 
         [TearDown]
@@ -36,9 +36,7 @@ namespace Assignment4.Test
         [Test]
         public void Assignment4_EnterInvalidPhoneNumber_ErrorMessageAppears()
         {
-            var path =
-                "file:///F:/Users/Rawa/Desktop/Computer%20Programmer%20Analyst/Winter%202018/Programming%20Software%20Quality%20Assurance/Assignment4/index.html";
-            driver.Navigate().GoToUrl(path);
+            driver.Navigate().GoToUrl(indexHtml);
             driver.FindElement(By.Id("phone")).Clear();
             driver.FindElement(By.Id("phone")).SendKeys("22-44-9966");
             driver.FindElement(By.Id("submitFrmNewCar")).Click();
@@ -49,9 +47,7 @@ namespace Assignment4.Test
         [Test]
         public void Assignment4_EnterInvalidEmail_ErrorMessageAppears()
         {
-            var path =
-                "file:///F:/Users/Rawa/Desktop/Computer%20Programmer%20Analyst/Winter%202018/Programming%20Software%20Quality%20Assurance/Assignment4/index.html";
-            driver.Navigate().GoToUrl(path);
+            driver.Navigate().GoToUrl(indexHtml);
             driver.FindElement(By.Id("email")).Clear();
             driver.FindElement(By.Id("email")).SendKeys("notanemail.com");
             driver.FindElement(By.Id("submitFrmNewCar")).Click();
@@ -64,19 +60,18 @@ namespace Assignment4.Test
         public void Assignment4_EnterValidInformation_DisplayEnteredDataOnNewPage()
         {
             //arrange
-            var path =
-                "file:///F:/Users/Rawa/Desktop/Computer%20Programmer%20Analyst/Winter%202018/Programming%20Software%20Quality%20Assurance/Assignment4/index.html";
             string expectedSellerName = "Rawa Jalal";
             string expectedAddress = "123 Made up Street";
-            string expectedCity = "city";
+            string expectedCity = "Waterloo";
             string expectedEmail = "rjalal5788@conestogac.on.ca";
             string expectedPhone = "123-123-1234";
             string expectedVehicleMake = "Subaru";
             string expectedVehicleModel = "Impreza";
             string expectedVehicleYear= "2009";
+            string expectedLink = "http://www.jdpower.com/cars/Subaru/Impreza/2009";
 
             //act
-            driver.Navigate().GoToUrl(path);
+            driver.Navigate().GoToUrl(indexHtml);
             driver.FindElement(By.Id("sellerName")).Clear();
             driver.FindElement(By.Id("sellerName")).SendKeys(expectedSellerName);
             driver.FindElement(By.Id("address")).Clear();
@@ -105,6 +100,8 @@ namespace Assignment4.Test
             string vehicleYear = driver.FindElement(By.Id("vehicleYear")).Text;
 
             //assert
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(d => d.Title == "Car Saved!");
             Assert.AreEqual(expectedSellerName,sellerName);
             Assert.AreEqual(expectedAddress,address);
             Assert.AreEqual(expectedCity,city);
@@ -114,5 +111,93 @@ namespace Assignment4.Test
             Assert.AreEqual(expectedVehicleModel,vehicleModel);
             Assert.AreEqual(expectedVehicleYear,vehicleYear);
         }
+
+        [Test]
+        public void Assignment4_EnterValidInformation_CorrectLinkDisplayedAndLinkWorks()
+        {
+            //arrange
+            string expectedSellerName = "Rawa Jalal";
+            string expectedAddress = "123 Made up Street";
+            string expectedCity = "Waterloo";
+            string expectedEmail = "rjalal5788@conestogac.on.ca";
+            string expectedPhone = "123-123-1234";
+            string expectedVehicleMake = "Subaru";
+            string expectedVehicleModel = "Impreza";
+            string expectedVehicleYear = "2009";
+            string expectedLinkText = "http://www.jdpower.com/cars/Subaru/Impreza/2009";
+
+            //act
+            driver.Navigate().GoToUrl(indexHtml);
+            driver.FindElement(By.Id("sellerName")).Clear();
+            driver.FindElement(By.Id("sellerName")).SendKeys(expectedSellerName);
+            driver.FindElement(By.Id("address")).Clear();
+            driver.FindElement(By.Id("address")).SendKeys(expectedAddress);
+            driver.FindElement(By.Id("city")).Clear();
+            driver.FindElement(By.Id("city")).SendKeys(expectedCity);
+            driver.FindElement(By.Id("email")).Clear();
+            driver.FindElement(By.Id("email")).SendKeys(expectedEmail);
+            driver.FindElement(By.Id("phone")).Clear();
+            driver.FindElement(By.Id("phone")).SendKeys(expectedPhone);
+            driver.FindElement(By.Id("vehicleMake")).Clear();
+            driver.FindElement(By.Id("vehicleMake")).SendKeys(expectedVehicleMake);
+            driver.FindElement(By.Id("vehicleModel")).Clear();
+            driver.FindElement(By.Id("vehicleModel")).SendKeys(expectedVehicleModel);
+            driver.FindElement(By.Id("vehicleYear")).Clear();
+            driver.FindElement(By.Id("vehicleYear")).SendKeys(expectedVehicleYear);
+            driver.FindElement(By.Id("submitFrmNewCar")).Click();
+            string linkText = driver.FindElement(By.Id("JDLink")).Text;
+
+            //assert
+            Assert.AreEqual(expectedLinkText,linkText);
+            driver.FindElement(By.Id("JDLink")).Click();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(d => d.FindElement(By.ClassName("model-title")).Text.Contains($"{expectedVehicleYear} {expectedVehicleMake} {expectedVehicleModel}"));
+        }
+
+
+
+        [Test]
+        public void Assignment4_EnterValidInformationAndSearch_CarlistPageContainsEnteredCar()
+        {
+            //arrange
+            string expectedSellerName = "John Maloney";
+            string expectedAddress = "123 Made up Street";
+            string expectedCity = "Waterloo";
+            string expectedEmail = "john@example.com";
+            string expectedPhone = "123-123-1234";
+            string expectedVehicleMake = "Honda";
+            string expectedVehicleModel = "Civic";
+            string expectedVehicleYear = "2016";
+            string expectedLinkURL = "http://www.jdpower.com/cars/Honda/Civic/2016";
+
+            //act
+            driver.Navigate().GoToUrl(indexHtml);
+            driver.FindElement(By.Id("sellerName")).Clear();
+            driver.FindElement(By.Id("sellerName")).SendKeys(expectedSellerName);
+            driver.FindElement(By.Id("address")).Clear();
+            driver.FindElement(By.Id("address")).SendKeys(expectedAddress);
+            driver.FindElement(By.Id("city")).Clear();
+            driver.FindElement(By.Id("city")).SendKeys(expectedCity);
+            driver.FindElement(By.Id("email")).Clear();
+            driver.FindElement(By.Id("email")).SendKeys(expectedEmail);
+            driver.FindElement(By.Id("phone")).Clear();
+            driver.FindElement(By.Id("phone")).SendKeys(expectedPhone);
+            driver.FindElement(By.Id("vehicleMake")).Clear();
+            driver.FindElement(By.Id("vehicleMake")).SendKeys(expectedVehicleMake);
+            driver.FindElement(By.Id("vehicleModel")).Clear();
+            driver.FindElement(By.Id("vehicleModel")).SendKeys(expectedVehicleModel);
+            driver.FindElement(By.Id("vehicleYear")).Clear();
+            driver.FindElement(By.Id("vehicleYear")).SendKeys(expectedVehicleYear);
+            driver.FindElement(By.Id("submitFrmNewCar")).Click();
+
+
+            driver.FindElement(By.Id("carlist")).Click();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(d => d.Title=="Car List");
+            IEnumerable<string> linkURLs = driver.FindElements(By.ClassName("car-link")).Select(x=>x.GetAttribute("href"));
+
+            //assert
+            Assert.That(linkURLs,Has.Member(expectedLinkURL));
+        }
     }
-}
+    }

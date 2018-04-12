@@ -77,7 +77,8 @@ function body_loadCars() {
         $.each(listOfCars.cars, function (index, element) {
             $("#links").append($('<a>', {
                 text: createJDUrl(element.vehicleMake, element.vehicleModel, element.vehicleYear),
-                href: createJDUrl(element.vehicleMake, element.vehicleModel, element.vehicleYear)
+                href: createJDUrl(element.vehicleMake, element.vehicleModel, element.vehicleYear),
+                class:"car-link"
             })).append($('<br>'));
         });
     }
